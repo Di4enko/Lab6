@@ -18,17 +18,17 @@ public class BouncingBall implements Runnable{
 
     public BouncingBall(Field field){
         this.field = field;
-        radius = new Double(Math.random()*(MAX_RADIUS-MIN_RADIUS)).intValue() + MIN_RADIUS;
-        speed = new Double(Math.round(5*MAX_SPEED/radius)).intValue();
-        if(speed>MAX_SPEED){
+        radius = new Double(Math.random() * (MAX_RADIUS-MIN_RADIUS)).intValue() + MIN_RADIUS;
+        speed = new Double(Math.round(5 * MAX_SPEED / radius)).intValue();
+        if(speed > MAX_SPEED){
             speed = MAX_SPEED;
         }
-        double angle = Math.random()*2*Math.PI;
-        speedX = 3*Math.cos(angle);
-        speedY = 3*Math.sin(angle);
+        double angle = Math.random() * 2 * Math.PI;
+        speedX = 3 * Math.cos(angle);
+        speedY = 3 * Math.sin(angle);
         color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
-        x = Math.random()*(field.getSize().getWidth()-2*radius)+radius;
-        y = Math.random()*(field.getSize().getHeight()-2*radius)+radius;
+        x = Math.random() * (field.getSize().getWidth() - 2 * radius) + radius;
+        y = Math.random() * (field.getSize().getHeight() - 2 * radius) + radius;
         Thread thisThread = new Thread(this);
         thisThread.start();
     }
@@ -37,17 +37,17 @@ public class BouncingBall implements Runnable{
         try{
             while(true){
                 field.canMove(this);
-                if(x+speedX <= radius){
+                if(x + speedX <= radius){
                     speedX = -speedX;
-                    x=radius;
+                    x = radius;
                 }else
-                    if(x+speedX >= field.getWidth()-radius){
+                    if(x + speedX >= field.getWidth() - radius){
                         speedX = -speedX;
-                        x = new Double(field.getWidth()-radius).intValue();
+                        x = new Double(field.getWidth() - radius).intValue();
                     }else
                         if(y + speedY <= radius){
                             speedY = -speedY;
-                            y=radius;
+                            y = radius;
                         }else
                             if(y + speedY >= field.getHeight() - radius){
                                 speedY = -speedY;
@@ -80,5 +80,17 @@ public class BouncingBall implements Runnable{
 
     public int getRadius() {
         return radius;
+    }
+
+    public int getMaxSpeed() {
+        return MAX_SPEED;
+    }
+
+    public void setSpeedX(double speedX) {
+        this.speedX = speedX;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
     }
 }

@@ -7,12 +7,14 @@ import java.util.List;
 
 public class Field extends JPanel {
     private boolean paused;
+    private BallController ballController = new BallController(this);
     private List<BouncingBall> balls = new ArrayList<BouncingBall>(10);
     private Timer repaintTimer = new Timer(10, e -> repaint()) ;
 
     public Field(){
         setBackground(Color.WHITE);
         repaintTimer.start();
+        this.addMouseListener(ballController);
     }
 
     public void paintComponent(Graphics graphics){
@@ -40,6 +42,10 @@ public class Field extends JPanel {
         if(paused){
             wait();
         }
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 
     public List<BouncingBall> getBalls() {
